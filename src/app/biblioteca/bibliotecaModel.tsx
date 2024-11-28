@@ -6,7 +6,7 @@ export class EmprestimoModel {
     livro: LivroModel;
     aluno: AlunoModel;
     emprestadoEm: Date;
-    devolvidoEm?: Date;
+    devolvidoEm?: Date | null;
   
     constructor(livro: LivroModel, aluno: AlunoModel) {
       if (!livro) {

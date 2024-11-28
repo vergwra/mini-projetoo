@@ -6,20 +6,20 @@ import LivroController from "../livros/livrosController"
 class BibliotecaController {
     private emprestimos: EmprestimoModel[] = [];
   
-    public async realizarEmprestimo(aluno: AlunoModel, livroId: string): Promise<void> {
-        const livro = await LivroController.getLivroPorId(livroId);
+    public async realizarEmprestimo(aluno: AlunoModel, livro: LivroModel): Promise<void> {
+        const livroId = await LivroController.getLivroPorId(livro.id);
 
         const novoEmprestimo = new EmprestimoModel(livro, aluno);
 
         this.emprestimos.push(novoEmprestimo);
-        await LivroController.alterarStatusLivro(livroId, "emprestado");
+        await LivroController.alterarStatusLivro(livro.id, "emprestado");
 
         console.log(`Empréstimo realizado: Aluno ${aluno.id}, Livro ${livroId}`);
     }
   
-    public async devolverLivro(aluno: AlunoModel, livroId: string): Promise<void> {
+    public async devolverLivro(aluno: AlunoModel, livro: LivroModel): Promise<void> {
         const emprestimo = this.emprestimos.find(
-            (e) => e.aluno.id === aluno.id && e.livro.id === livroId && !e.devolvidoEm
+            (e) => e.aluno.id === aluno.id && e.livro.id === livro.id && !e.devolvidoEm
         );
     
         if (!emprestimo) {
@@ -27,20 +27,18 @@ class BibliotecaController {
         }
     
         emprestimo.devolvidoEm = new Date();
-        await LivroController.alterarStatusLivro(livroId, "disponível");
+        await LivroController.alterarStatusLivro(livro.id, "disponível");
     
-        console.log(`Livro devolvido: Aluno ${aluno.id}, Livro ${livroId}`);
+        console.log(`Livro devolvido: Aluno ${aluno.nome}, Livro ${livro.id}`);
     }
   
-    public async verificarEmprestimo(alunoId: number, livroId: string): Promise<boolean> {
+    public async verificarEmprestimo(aluno: AlunoModel, livro: LivroModel): Promise<boolean> {
         return this.emprestimos.some(
-            (e) => e.aluno.id === alunoId && e.livro.id === livroId && !e.devolvidoEm
+            (e) => e.aluno.id === aluno.id && e.livro.id === livro.id && !e.devolvidoEm
         );
     }
   
-    public async listarTodosEmprestimos(): Promise<EmprestimoModel[]> {
-        return this.emprestimos;
-    }
+
 }
   
 export default new BibliotecaController();

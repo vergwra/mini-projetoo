@@ -16,6 +16,10 @@ const MatriculaView: React.FC<MatriculaViewProps> = ({ aluno, disciplina }) => {
     const [matriculado, setMatriculado] = useState<boolean | null>(null);
     const [loading, setLoading] = useState(true);
 
+    // pegar todos as matriculas do aluno
+    // Verificar se um dessas matriculas eh da disciplina que to querendo ver
+  
+
     useEffect(() => {
     const verificarMatricula = async () => {
         try {

@@ -7,9 +7,16 @@ export function CardAluno({ aluno }: { aluno: AlunoModel }){
         <Card className="p-4">
             <div className="flex flex-col">
                 <p className="text-xl font-bold">Olá {aluno?.nome}</p>
-                <p>Curso: {aluno?.curso}</p>
-                <p>Modalidade: {aluno?.modalidade}</p>
-                <p>Status: {aluno?.status}</p>
+                <div>
+                    <div>
+                        <p>Curso: {aluno?.curso}</p>
+                        <p>Status: {aluno?.status}</p>
+                        <p>Modalidade: {aluno?.modalidade}</p>
+                    </div>
+                    <div>
+
+                    </div>
+                </div>
             </div>
         </Card>
     )

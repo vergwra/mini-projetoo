@@ -10,6 +10,7 @@ import { Search } from "lucide-react";
 import MatriculaView from "../matricula/matriculaView";
 import { useSearchParams } from "next/navigation";
 import { useAluno } from "../alunos/use-aluno";
+import { CardAluno } from "@/(components)/aluno-card";
 
 
 const DisciplinaView = () => {
@@ -58,8 +59,9 @@ const DisciplinaView = () => {
         {loading ? (
             <p>Carregando...</p>
         ) : (
-        <div className="flex flex-col gap-4 px-20 p-4">
-             <div>
+            <div className="flex flex-col gap-4 px-20 p-4">
+            <CardAluno aluno={aluno}/>
+             <div> 
                 <Search className="absolute ml-1 mt-1 text-muted-foreground w-7"/>
                 <div className="w-full flex gap-4">
                     <Input 

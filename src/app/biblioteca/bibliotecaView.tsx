@@ -20,7 +20,7 @@ function BibliotecaView({ aluno, livro }: BibliotecaViewProps) {
     useEffect(() => {
         const verificarEmprestimo = async () => {
             try {
-                const estaEmprestado = await BibliotecaController.verificarEmprestimo(aluno.id, livro.id);
+                const estaEmprestado = await BibliotecaController.verificarEmprestimo(aluno, livro);
                 setEmprestado(estaEmprestado);
             } catch (error) {
                 console.error("Erro ao verificar empréstimo:", error);
@@ -36,10 +36,10 @@ function BibliotecaView({ aluno, livro }: BibliotecaViewProps) {
         try {
             setLoading(true);
             if (emprestado) {
-                await BibliotecaController.devolverLivro(aluno, livro.id);
+                await BibliotecaController.devolverLivro(aluno, livro);
                 alert("Livro devolvido com sucesso.");
             } else {
-                await BibliotecaController.realizarEmprestimo(aluno, livro.id);
+                await BibliotecaController.realizarEmprestimo(aluno, livro);
                 alert("Empréstimo realizado com sucesso.");
             }
             setEmprestado(!emprestado);

@@ -10,6 +10,7 @@ import { Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import BibliotecaView from "../biblioteca/bibliotecaView";
+import { CardAluno } from "@/(components)/aluno-card";
 
 const LivrosView: React.FC = () => {
     const searchParams = useSearchParams();
@@ -60,7 +61,9 @@ const LivrosView: React.FC = () => {
     return (
       <div className="flex flex-col gap-4">
         <Header id={aluno?.id}/>
+
         <div className="flex flex-col gap-4 px-20">
+        <CardAluno aluno={aluno}/>
             <div>
                 <Search className="absolute ml-1 mt-1 text-muted-foreground w-7"/>
                 <div className="w-full flex gap-4">
